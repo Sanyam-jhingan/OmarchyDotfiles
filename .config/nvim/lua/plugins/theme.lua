@@ -1,0 +1,1 @@
+/home/sparto/.config/omarchy/current/theme/neovim.lua
