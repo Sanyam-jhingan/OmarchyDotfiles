@@ -89,7 +89,7 @@ alias ls='ls -A --color=auto'
 alias n='nvim'
 alias y='yazi'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
+alias f='nvim $(fzf --preview="cat {}")'
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -121,3 +121,5 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval "$(zoxide init zsh)"
