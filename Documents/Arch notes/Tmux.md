@@ -1,4 +1,4 @@
-# 🐧 Tmux Master Guide
+# 🐧 [[Tmux]] Master Guide
 
 #Tmux is a terminal multiplexer that allows for persistent sessions and split-pane management. 
 
