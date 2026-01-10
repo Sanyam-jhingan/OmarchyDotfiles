@@ -77,7 +77,11 @@ fi
 CHANGES=()
 for path in "${ALL_PATHS[@]}"; do
     if [[ -e "$path" ]]; then
-        if config status --porcelain "$path" | grep -q .; then
+        if ! config ls-files --error-unmatch "$path" &>/dev/null; then
+            # New/untracked
+            CHANGES+=("$path")
+        elif [[ -n $(config status --porcelain "$path") ]]; then
+            # Modified
             CHANGES+=("$path")
         fi
     fi
@@ -93,27 +97,26 @@ if $DRY_RUN; then
         for change in "${CHANGES[@]}"; do
             echo "  - $change"
         done
-        DATE=$(date +%Y-%m-%d)
-        MSG="Backup dotfiles: $DATE - ${(j:,:)CHANGES}"
+        DATE=${(%):-%D{%Y-%m-%d}}
+        MSG="Backup dotfiles: $DATE"
         echo "Would commit with message: '$MSG'"
-        echo "Would push to remote."
+        echo "Would require manual push: 'config push origin master'"
     fi
     echo ""
     echo "To apply these changes, run: ./backup.sh --real"
 else
     echo "Real mode: Applying changes..."
-    if [[ ${#CHANGES[@]} -eq 0 ]]; then
+    if [[ ${#CHANGES[@]} -gt 0 ]]; then
+        for change in "${CHANGES[@]}"; do
+            config add "$change"
+            echo "Added: $change"
+        done
+        DATE=${(%):-%D{%Y-%m-%d}}
+        MSG="Backup dotfiles: $DATE"
+        config commit -m "$MSG"
+        echo "Committed with message: '$MSG'"
+        echo "Run 'config push origin master' to push changes to remote."
+    else
         echo "No changes to commit."
-        exit 0
     fi
-    for change in "${CHANGES[@]}"; do
-        config add "$change"
-        echo "Added: $change"
-    done
-    DATE=$(date +%Y-%m-%d)
-    MSG="Backup dotfiles: $DATE - ${(j:,:)CHANGES}"
-    config commit -m "$MSG"
-    echo "Committed with message: '$MSG'"
-    config push
-    echo "Pushed to remote."
 fi
