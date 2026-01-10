@@ -1,182 +1,36 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### Minimal - Long ### //
+
 {
-  "layer": "top",
-  "position": "top",
-  "autohide": true,
-  "autohide-blocked": false,
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
-  /* === Modules Order === */
-  "modules-left": [
-    "custom/archicon",
-    "clock",
-    "cpu",
-    /*"memory",
-    "disk",*/
-    "custom/weather",
-    "temperature"
-  ],
-  "modules-center": [
-    "hyprland/workspaces"
-  ],
-  "modules-right": [
-   /* "wlr/taskbar",*/
-    "idle_inhibitor",
-    "custom/nightlight",
-    "pulseaudio/slider",
-    "pulseaudio",
-    "backlight",
-    "network",
-    "custom/notification"
-  ],
-  /* === Modules Left === */
-  "custom/archicon": {
-    "format": "",
-    "on-click": "omarchy-menu",
-    "tooltip": false
-  },
-  "clock": {
-    "timezone": "Asia/calcutta",
-    "format": "{:%I:%M  %d, %m}",
-    "tooltip-format": "{calendar}",
-    "calendar": {
-      "mode": "month"
-    }
-  },
-  "cpu": {
-    "format": "{usage}% ",
-    "tooltip": true,
-    "tooltip-format": "Uso de CPU: {usage}%\nNúcleos: {cores}"
-  },
-  "memory": {
-    "format": "{}% 󰍛",
-    "tooltip": true,
-    "tooltip-format": "RAM en uso: {used} / {total} ({percentage}%)"
-  },
-  "disk": {
-    "format": "{percentage_free}% ",
-    "tooltip": true,
-    "tooltip-format": "Espacio libre: {free} / {total} ({percentage_free}%)"
-  },
-  "temperature": {
-    "format": "{temperatureC}°C {icon}",
-    "tooltip": true,
-    "tooltip-format": "Temperatura actual: {temperatureC}°C\nCrítico si > 80°C",
-    "format-icons": [
-      ""
-    ]
-  },
-  /* === Modules Center === */
-  "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "active": ""
-    },
-    "persistent-workspaces": {
-      "*": 5
-    },
-    "disable-scroll": true,
-    "all-outputs": true,
-    "show-special": true
-  },
-  /* === Modules Right === */
-  "wlr/taskbar": {
-    "format": "{icon}",
-    "all-outputs": true,
-    "active-first": true,
-    "tooltip-format": "{name}",
-    "on-click": "activate",
-    "on-click-middle": "close",
-    "ignore-list": [
-      "rofi"
-    ]
-  },
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "",
-      "deactivated": ""
-    }
-  },
-  "pulseaudio/slider": {
-    "format": "{volume}%",
-    "format-muted": " MUTE",
-    "step": 5,
-    "tooltip": false
-  },
-  "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-muted": " {format_source}",
-    "format-icons": {
-      "default": [
-        "",
-        ""
-      ]
-    }
-  },
-  "network": {
-   /* "format": "{ifname}",
-    "format-ethernet": "{ifname} 󰈀",
-    "format-disconnected": " ",
-    "tooltip-format": " {ifname} via {gwaddr}",
-    "tooltip-format-ethernet": " {ifname} {ipaddr}/{cidr}",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50 */
-    "interval": 2, // Refresh every 2 seconds for speed
-    "format-wifi": "󰖩 {bandwidthDownBytes}",
-    "format-ethernet": "󰈀 {bandwidthDownBytes}",
-    "format-disconnected": "󰖪 ",
-    "tooltip-format": "{essid} {ipaddr}\n󰇚 {bandwidthDownBytes} 󰕒 {bandwidthUpBytes}",
-    "on-click": "kitty -e nmtui"
-  },
- "backlight": {
-    "device": "amdgpu_bl0", // On your ASUS TUF, it's usually amdgpu_bl0
-    "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
-    "on-scroll-up": "brightnessctl set 1%+",
-    "on-scroll-down": "brightnessctl set 1%-",
-    "min-length": 6
-  },
-"custom/nightlight": {
-    "format": "󰖔",
-    "tooltip": false,
-    "on-click": "pgrep gammastep && pkill gammastep || gammastep -O 3500 &",
-    "on-click-right": "pgrep gammastep && pkill gammastep || gammastep -O 2500 &",
-  },
-"custom/weather": {
-    "format": "{} ",
-    "tooltip": true,
-    "interval": 60, // Updates every 30 mins
-    "exec": "wttrbar --location amritsar --nerd", 
-    "return-type": "json",
-    "on-click": "xdg-open https://wttr.in/amritsar",
-    "on-click-right": "pkill -RTMIN+8 waybar" // Secret command to force refresh
-},
-  "hyprland/language": {
-    "format": "{} ",
-    "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
-    "format-es": "ESP",
-    "format-en": "ENG"
-  },
-  "custom/notification": {
-    "tooltip": true,
-    "format": "<span size='16pt'>{icon}</span>",
-    "format-icons": {
-      "notification": "󱅫",
-      "none": "󰂜",
-      "dnd-notification": "󰂠",
-      "dnd-none": "󰪓",
-      "inhibited-notification": "󰂛",
-      "inhibited-none": "󰪑",
-      "dnd-inhibited-notification": "󰂛",
-      "dnd-inhibited-none": "󰪑"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
+"include": "~/.config/waybar/modules",
+"layer": "top",
+"mode": "dock",
+"exclusive": true,
+"passthrough": false,
+"position": "top",
+"spacing": 6,
+"fixed-center": true,
+"ipc": true,
+"margin-top": 3,
+"margin-left": 8,
+"margin-right": 8,
+
+"modules-left": [
+	"custom/menu",
+	"hyprland/workspaces#4",
+	"mpris",
+  "network#speed",
+	],
+"modules-center": [
+	"clock",
+	],
+"modules-right": [
+	"group/motherboard",
+	"group/audio",
+  "custom/swaync",
+	"custom/separator#blank_2",
+	"custom/power",
+	],
+
 }

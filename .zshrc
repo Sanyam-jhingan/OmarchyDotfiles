@@ -90,6 +90,7 @@ alias n='nvim'
 alias y='yazi'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias f='nvim $(fzf --preview="cat {}")'
+alias todo='todoist-rs'
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -123,3 +124,10 @@ alias f='nvim $(fzf --preview="cat {}")'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(zoxide init zsh)"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh --disable-up-arrow)"
+
+# opencode
+export PATH=/home/sparto/.opencode/bin:$PATH
