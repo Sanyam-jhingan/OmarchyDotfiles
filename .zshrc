@@ -123,6 +123,7 @@ alias todo='todoist-rs'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Testing backup.sh script (delete later)
 eval "$(zoxide init zsh)"
 
 . "$HOME/.atuin/bin/env"
