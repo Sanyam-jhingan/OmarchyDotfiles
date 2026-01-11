@@ -205,11 +205,12 @@
   },
   "active": "d7f282dd1861cac9",
   "lastOpenFiles": [
-    "LazyVim.md",
     "Dotfiles.md",
-    "Related topics.md",
     "External resources.md",
+    "per-device-key-remapping-keyd.md",
+    "LazyVim.md",
     "Tmux.md",
+    "Related topics.md",
     "testing.md",
     "Welcome.md"
   ]

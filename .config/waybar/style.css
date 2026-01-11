@@ -26,7 +26,7 @@ padding: 1px;
 }
 
 window#waybar {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.7);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -65,37 +65,39 @@ tooltip label{
     background-color: transparent;
     color: #ffffff;
     box-shadow: none;
-	text-shadow: none;
+ 	text-shadow: none;
     padding: 0px;
     border-radius: 9px;
     padding-left: 4px;
     padding-right: 4px;
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+    transition: opacity 0.2s ease, color 0.3s ease, background 0.3s ease;
 }
 
 #workspaces button.active {
     background-color: transparent;
     color: @accent1;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+    opacity: 1;
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
-	color: @accent3;
-    padding-left: 2px;
-    padding-right: 2px;
+ 	color: @accent3;
+    padding-left: 4px;
+    padding-right: 4px;
+    opacity: 0.9;
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button.focused {
     background-color: #bbccdd;
     color: @accent2;
-    /* box-shadow: inset 0 -3px #ffffff; */
+    padding-left: 4px;
+    padding-right: 4px;
+    opacity: 1;
 }
 
 #workspaces button.urgent {
@@ -206,6 +208,12 @@ label:focus {
     /*padding: 3px;*/
 }
 
+#custom-waybar-blur {
+    color: @accent6;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
 #custom-keyboard,
 #cpu {
     color: @accent1;
@@ -237,6 +245,22 @@ label:focus {
 
 #pulseaudio-muted {
     color: @accent2;
+}
+
+#idle_inhibitor {
+    color: @accent5;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+#idle_inhibitor.activated {
+    color: @accent1;
+}
+
+#custom-nightlight {
+    color: @accent4;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 #wireplumber {
     color: @accent4;

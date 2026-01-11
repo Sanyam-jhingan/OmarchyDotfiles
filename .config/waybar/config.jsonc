@@ -17,13 +17,14 @@
 "margin-right": 8,
 
 "modules-left": [
+	"custom/waybar-blur",
 	"custom/menu",
-	"hyprland/workspaces#4",
+	"clock",
 	"mpris",
-  "network#speed",
+   "network#speed",
 	],
 "modules-center": [
-	"clock",
+	"hyprland/workspaces#4",
 	],
 "modules-right": [
 	"group/motherboard",

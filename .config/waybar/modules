@@ -107,7 +107,7 @@
 //  NUMBERS and ICONS style
 "hyprland/workspaces#4": {
     "format": "{name}",
-    "format": " {name} {icon} ",
+    "format": "{name} {icon}",
     //"format": " {icon} ",
     "show-special": false,
     "on-click": "activate",
@@ -136,12 +136,14 @@
 "group/motherboard": {
     "orientation": "horizontal",
     "modules": [
-      "custom/weather",
-      "custom/updater",
       "cpu",
+      "custom/weather",
+      "idle_inhibitor",
+      "custom/nightlight",
+      "custom/updater",
       "memory",
       "temperature",
-      ]	
+      ]
 },
   
 "group/laptop": {
@@ -218,9 +220,9 @@
      
 "clock": {
     "interval": 1,
-    //"format": " {:%I:%M %p}", // AM PM format
-    "format": " {:%H:%M:%S}",
-    "format-alt": " {:%H:%M   %Y, %d %B, %A}",
+    "format": " {:%I:%M %p}",
+    //"format": " {:%H:%M:%S}",
+    "format-alt": " {:%I:%M %p}   %Y, %d %B, %A}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode"          : "year",
@@ -230,12 +232,12 @@
       "format": {
       "months":     "<span color='#ffead3'><b>{}</b></span>",
       "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-      "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+      "weeks":      "<span color='#99ffdd'><b>{W{}</b></span>",
       "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
       "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-                }
-                }
-    },              
+                 }
+                 }
+    },
     "actions":  {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
@@ -474,6 +476,15 @@
     "on-click-right": "~/.config/hypr/scripts/WaybarLayout.sh",
 },
 
+"custom/waybar-blur": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/hypr/scripts/check-waybar-blur.sh",
+    "on-click": "~/.config/hypr/scripts/toggle-waybar-blur.sh",
+    "interval": 5,
+    "tooltip": true,
+},
+
 // This is a custom cava visualizer
 "custom/cava_mviz": {
     "exec": "~/.config/hypr/scripts/WaybarCava.sh",
@@ -523,12 +534,12 @@
     "escape": true
 },
     
-// NOTE:! This is only for Arch and Arch Based Distros  
+// NOTE:! This is only for Arch and Arch Based Distros
 "custom/updater":{
     "format": " {}",
-    "exec": "checkupdates | wc -l",
-    "exec-if": "[[ $(checkupdates | wc -l) ]]",
-    "interval": 15,
+    "return-type": "json",
+    "exec": "~/.config/hypr/scripts/check-updates.sh",
+    "interval": 60,
     "on-click": "kitty -T update yay -Syu && notify-send 'The system has been updated'",
 },
     
@@ -536,12 +547,31 @@
     "format": "{}",
     "format-alt": "{alt}: {}",
     "format-alt-click": "click",
-    "interval": 3600,
+    "interval": 1800,
     "return-type": "json",
-    "exec": "~/.config/hypr/scripts/Weather.sh",
     "exec": "~/.config/hypr/scripts/Weather.py",
-    "exec-if": "ping wttr.in -c1",
-    "tooltip" : true,
+    "exec-if": "ping wttr.in -c1 -W 2",
+    "tooltip": true,
+    "on-click": "xdg-open https://wttr.in/Amritsar",
+    "on-click-right": "~/.config/hypr/scripts/refresh-weather.sh",
+},
+
+"idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": " ",
+      "deactivated": " ",
+                    }
+},
+
+"custom/nightlight": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/hypr/scripts/nightlight-status.sh",
+    "on-click": "~/.config/hypr/scripts/nightlight-left-click.sh",
+    "on-click-right": "~/.config/hypr/scripts/nightlight-right-click.sh",
+    "interval": 5,
+    "tooltip": true,
 },
   
   
